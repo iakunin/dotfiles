@@ -1,13 +1,19 @@
 # dotfiles
 For more sophisticated example of dotfiles-repo see: https://github.com/Mitrichius/dotfiles
 
+## Setting up git
+```shell
+ln -s $(pwd)/git/.gitconfig ~
+ln -s $(pwd)/git/.gitconfig.d ~
+```
+
 ## Setting up GPG
 For more info see: https://github.com/drduh/YubiKey-Guide#using-keys
 
 ```shell
-cp ./gpg/gpg.conf ~/.gnupg/
+ln -s $(pwd)/gnupg/gpg.conf ~/.gnupg
 chmod 600 ~/.gnupg/gpg.conf
-gpg --import ./gpg/gpg-0x*.asc
+gpg --import ./gnupg/gpg-0x*.asc
 ```
 
 Edit the master key to assign it ultimate trust by selecting `trust` and `5`:
@@ -103,7 +109,7 @@ For more info see: https://github.com/drduh/YubiKey-Guide#ssh
 
 ```shell
 brew install pinentry-mac
-cp ./gpg/gpg-agent.conf  ~/.gnupg/
-cp ./macos/Library/LaunchAgents/environment.plist ~/Library/LaunchAgents/
-cp ./zsh/.zshrc ~/
+ln -s $(pwd)/gnupg/gpg-agent.conf ~/.gnupg
+ln -s $(pwd)/macos/Library/LaunchAgents/environment.plist ~/Library/LaunchAgents
+ln -s $(pwd)/zsh/.zshrc ~
 ```
