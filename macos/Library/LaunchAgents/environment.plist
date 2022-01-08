@@ -1,0 +1,24 @@
+<!-- Setting GPG_TTY and SSH_AUTH_SOCK env-variables globally (for all MacOS apps) -->
+<!-- For more info see: https://stackoverflow.com/a/26586170/3456163 -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>my.startup</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>sh</string>
+    <string>-c</string>
+    <string>
+    launchctl setenv GPG_TTY "$(tty)"
+    launchctl setenv SSH_AUTH_SOCK $(gpgconf --list-dirs agent-ssh-socket)
+    gpgconf --launch gpg-agent
+    </string>
+
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+</dict>
+</plist>
