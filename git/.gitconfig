@@ -1,0 +1,22 @@
+[core]
+    autocrlf = input
+    excludesfile = ~/.gitconfig.d/.gitignore-global
+[commit]
+    gpgsign = true
+[credential]
+    helper = cache --timeout=3600
+
+[user]
+    name = Maksim Iakunin
+    email = yakuninm@gmail.com
+    signingkey = 308EC438C3AE5BC6
+[includeIf "gitdir:~/Code/gitlab/"]
+    path = ~/.gitconfig.d/.gitconfig-gitlab
+[includeIf "gitdir:~/Code/github/"]
+    path = ~/.gitconfig.d/.gitconfig-github
+
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
