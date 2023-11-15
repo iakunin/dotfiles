@@ -111,5 +111,11 @@ For more info see: https://github.com/drduh/YubiKey-Guide#ssh
 brew install pinentry-mac
 ln -s $(pwd)/gnupg/gpg-agent.conf ~/.gnupg
 ln -s $(pwd)/macos/Library/LaunchAgents/environment.plist ~/Library/LaunchAgents
-ln -s $(pwd)/zsh/.zshrc ~
+```
+
+
+## Setting up ZSH customization
+```shell
+ln -s $(pwd)/zsh/aliases.zsh $ZSH_CUSTOM/
+ln -s $(pwd)/zsh/gpg-agent.zsh $ZSH_CUSTOM/
 ```
