@@ -114,6 +114,12 @@ ln -s $(pwd)/macos/Library/LaunchAgents/environment.plist ~/Library/LaunchAgents
 ```
 
 
+## Setting up ~/bin dir
+```shell
+ln -s $(pwd)/bin ~/
+```
+
+
 ## Setting up ZSH customization
 ```shell
 ln -s $(pwd)/zsh/aliases.zsh $ZSH_CUSTOM/
