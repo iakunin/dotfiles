@@ -1,0 +1,34 @@
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+
+.attach_pid*
+
+# asciidoctor
+docs/**/.asciidoctor/
+docs/**/*.html
+docs/**/*.png
+docs/**/*.cache
+/public
+/.cache
+/.java
+
+##############
+!bin/log/.gitkeep
+bin/log/*

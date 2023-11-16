@@ -6,9 +6,9 @@
 # Source: https://github.com/sorinipate/vpn-up-for-openconnect
 
 PROGRAM_NAME=$(basename $0)
-
-PID_FILE_PATH="${PWD}/${PROGRAM_NAME}.pid"
-LOG_FILE_PATH="${PWD}/${PROGRAM_NAME}.log"
+DIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
+PID_FILE_PATH="${DIR}/${PROGRAM_NAME}.pid"
+LOG_FILE_PATH="${DIR}/${PROGRAM_NAME}.log"
 
 # OPTIONS
 BACKGROUND=FALSE
@@ -25,16 +25,34 @@ WARNING="\x1b[35;1m"
 DANGER="\x1b[31;1m"
 RESET="\x1b[0m"
 
+
+function wait_for_op_available() {
+    version="0"
+    while : ; do
+      printf "Checking if 'op' is available\n"
+      version=$(/opt/homebrew/bin/op --version)
+      if [ "$version" != "0" ]; then
+          printf "'op' is available! Continuing...\n"
+          break
+      fi
+      printf "'op' is not available! Sleeping...\n"
+      sleep 1
+    done
+}
+
+wait_for_op_available
+
+
 export VPN_NAME="PaloAlto GlobalProtect"
 export PROTOCOL="gp"
     # anyconnect       Compatible with Cisco AnyConnect SSL VPN, as well as ocserv (default)
     # nc               Compatible with Juniper Network Connect
     # gp               Compatible with Palo Alto Networks (PAN) GlobalProtect SSL VPN
     # pulse            Compatible with Pulse Connect Secure SSL VPN
-export VPN_HOST=$(op read "op://Private/mkolgjopnanhi7i7oolvjbtug4/PaloAlto_GlobalProtect_VPN_Host")
+export VPN_HOST=$(/opt/homebrew/bin/op read "op://Private/mkolgjopnanhi7i7oolvjbtug4/PaloAlto_GlobalProtect_VPN_Host")
 #export VPN_GROUP=<group>
-export VPN_USER=$(op read "op://Private/mkolgjopnanhi7i7oolvjbtug4/email")
-export VPN_PASSWD=$(op read "op://Private/mkolgjopnanhi7i7oolvjbtug4/password")
+export VPN_USER=$(/opt/homebrew/bin/op read "op://Private/mkolgjopnanhi7i7oolvjbtug4/email")
+export VPN_PASSWD=$(/opt/homebrew/bin/op read "op://Private/mkolgjopnanhi7i7oolvjbtug4/password")
 
 function start(){
 
@@ -135,12 +153,12 @@ function connect(){
             printf "$PRIMARY"
             printf "Running the '$VPN_NAME' with less output (quiet) ...\n"
             printf "$RESET"
-            echo $VPN_PASSWD | sudo openconnect --protocol=$PROTOCOL --background --quiet $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH > $LOG_FILE_PATH 2>&1
+            echo $VPN_PASSWD | sudo /opt/homebrew/bin/openconnect --protocol=$PROTOCOL --background --quiet $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH 2>&1 | /opt/homebrew/bin/gawk '{ print strftime("[%F %T %Z]"), $0; fflush() }' > $LOG_FILE_PATH
         else
             printf "$PRIMARY"
             printf "Running the '$VPN_NAME' with detailed output ...\n"
             printf "$RESET"
-            echo $VPN_PASSWD | sudo openconnect --protocol=$PROTOCOL --background $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH > $LOG_FILE_PATH 2>&1
+            echo $VPN_PASSWD | sudo /opt/homebrew/bin/openconnect --protocol=$PROTOCOL --background $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH 2>&1 | /opt/homebrew/bin/gawk '{ print strftime("[%F %T %Z]"), $0; fflush() }' > $LOG_FILE_PATH
         fi
     else
         printf "$PRIMARY"
@@ -151,12 +169,12 @@ function connect(){
             printf "$PRIMARY"
             printf "Running the '$VPN_NAME' with less output (quiet) ...\n"
             printf "$RESET"
-            echo $VPN_PASSWD | sudo openconnect --protocol=$PROTOCOL --quiet $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH
+            echo $VPN_PASSWD | sudo /opt/homebrew/bin/openconnect --protocol=$PROTOCOL --quiet $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH 2>&1 | /opt/homebrew/bin/gawk '{ print strftime("[%F %T %Z]"), $0; fflush() }'
         else
             printf "$PRIMARY"
             printf "Running the '$VPN_NAME' with detailed output ...\n"
             printf "$RESET"
-            echo $VPN_PASSWD | sudo openconnect --protocol=$PROTOCOL $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH
+            echo $VPN_PASSWD | sudo /opt/homebrew/bin/openconnect --protocol=$PROTOCOL $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH 2>&1 | /opt/homebrew/bin/gawk '{ print strftime("[%F %T %Z]"), $0; fflush() }'
         fi
     fi
 

@@ -110,15 +110,16 @@ For more info see: https://github.com/drduh/YubiKey-Guide#ssh
 ```shell
 brew install pinentry-mac
 ln -s $(pwd)/gnupg/gpg-agent.conf ~/.gnupg
-ln -s $(pwd)/macos/Library/LaunchAgents/environment.plist ~/Library/LaunchAgents
+ln -s $(pwd)/macos/Library/LaunchAgents/com.github.iakunin.dotfiles.gpgconf.plist ~/Library/LaunchAgents
 ```
 
-
-## Setting up ~/bin dir
+## Setting up vpn
 ```shell
 ln -s $(pwd)/bin ~/
+chmod u+x $(pwd)/bin/*
+ln -s $(pwd)/macos/Library/LaunchAgents/com.github.iakunin.dotfiles.vpn.plist ~/Library/LaunchAgents
+sudo cp $(pwd)/etc/sudoers.d/openconnect /etc/sudoers.d/openconnect
 ```
-
 
 ## Setting up ZSH customization
 ```shell

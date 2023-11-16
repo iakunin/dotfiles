@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+        "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+
+<plist version="1.0">
+    <dict>
+        <key>Label</key>
+        <string>com.github.iakunin.dotfiles.vpn-up</string>
+
+        <key>ProgramArguments</key>
+        <array>
+            <string>/Users/iakunin/bin/vpn-up.sh</string>
+            <string>start</string>
+        </array>
+
+        <key>ProcessType</key>
+        <string>Background</string>
+
+        <key>RunAtLoad</key>
+        <true/>
+
+        <key>KeepAlive</key>
+        <true/>
+
+<!--        <key>StandardErrorPath</key>-->
+<!--        <string>/Users/iakunin/bin/log/vpn-up.err</string>-->
+
+<!--        <key>StandardOutPath</key>-->
+<!--        <string>/Users/iakunin/bin/log/vpn-up.out</string>-->
+
+    </dict>
+</plist>
