@@ -126,3 +126,9 @@ sudo cp $(pwd)/etc/sudoers.d/openconnect /etc/sudoers.d/openconnect
 ln -s $(pwd)/zsh/aliases.zsh $ZSH_CUSTOM/
 ln -s $(pwd)/zsh/gpg-agent.zsh $ZSH_CUSTOM/
 ```
+
+## Installing NVM
+```shell
+brew install nvm
+ln -s $(pwd)/zsh/nvm.zsh $ZSH_CUSTOM/
+```
