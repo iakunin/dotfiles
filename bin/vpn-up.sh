@@ -5,6 +5,9 @@
 # Copyright (c) Sorin-Doru Ipate
 # Source: https://github.com/sorinipate/vpn-up-for-openconnect
 
+# prepend a timestamp to all output (https://unix.stackexchange.com/a/622928/409236)
+exec &> >( /opt/homebrew/bin/gawk '{ print strftime("[%Y-%m-%d %H:%M:%S] "), $0 }' )
+
 PROGRAM_NAME=$(basename $0)
 DIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
 PID_FILE_PATH="${DIR}/${PROGRAM_NAME}.pid"
@@ -153,12 +156,12 @@ function connect(){
             printf "$PRIMARY"
             printf "Running the '$VPN_NAME' with less output (quiet) ...\n"
             printf "$RESET"
-            echo $VPN_PASSWD | sudo /opt/homebrew/bin/openconnect --protocol=$PROTOCOL --background --quiet $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH 2>&1 | /opt/homebrew/bin/gawk '{ print strftime("[%F %T %Z]"), $0; fflush() }' > $LOG_FILE_PATH
+            echo $VPN_PASSWD | sudo /opt/homebrew/bin/openconnect --protocol=$PROTOCOL --background --quiet $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH 2>&1 > $LOG_FILE_PATH
         else
             printf "$PRIMARY"
             printf "Running the '$VPN_NAME' with detailed output ...\n"
             printf "$RESET"
-            echo $VPN_PASSWD | sudo /opt/homebrew/bin/openconnect --protocol=$PROTOCOL --background $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH 2>&1 | /opt/homebrew/bin/gawk '{ print strftime("[%F %T %Z]"), $0; fflush() }' > $LOG_FILE_PATH
+            echo $VPN_PASSWD | sudo /opt/homebrew/bin/openconnect --protocol=$PROTOCOL --background $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH 2>&1 > $LOG_FILE_PATH
         fi
     else
         printf "$PRIMARY"
@@ -169,12 +172,12 @@ function connect(){
             printf "$PRIMARY"
             printf "Running the '$VPN_NAME' with less output (quiet) ...\n"
             printf "$RESET"
-            echo $VPN_PASSWD | sudo /opt/homebrew/bin/openconnect --protocol=$PROTOCOL --quiet $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH 2>&1 | /opt/homebrew/bin/gawk '{ print strftime("[%F %T %Z]"), $0; fflush() }'
+            echo $VPN_PASSWD | sudo /opt/homebrew/bin/openconnect --protocol=$PROTOCOL --quiet $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH 2>&1
         else
             printf "$PRIMARY"
             printf "Running the '$VPN_NAME' with detailed output ...\n"
             printf "$RESET"
-            echo $VPN_PASSWD | sudo /opt/homebrew/bin/openconnect --protocol=$PROTOCOL $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH 2>&1 | /opt/homebrew/bin/gawk '{ print strftime("[%F %T %Z]"), $0; fflush() }'
+            echo $VPN_PASSWD | sudo /opt/homebrew/bin/openconnect --protocol=$PROTOCOL $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH 2>&1
         fi
     fi
 
