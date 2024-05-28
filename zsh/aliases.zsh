@@ -8,6 +8,8 @@ alias la="ls -A"
 alias l="ls -CF"
 
 alias vpn="~/bin/vpn-up.sh start"
+alias ssh-ha="ssh root@homeassistant.local"
+alias ssh-homeassistant="ssh root@homeassistant.local"
 
 # vpn status
 alias vstatus="launchctl list | grep com.github.iakunin.dotfiles.vpn-up"
