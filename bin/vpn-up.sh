@@ -156,12 +156,12 @@ function connect(){
             printf "$PRIMARY"
             printf "Running the '$VPN_NAME' with less output (quiet) ...\n"
             printf "$RESET"
-            echo $VPN_PASSWD | sudo /opt/homebrew/bin/openconnect --protocol=$PROTOCOL --background --quiet $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH 2>&1 > $LOG_FILE_PATH
+            echo $VPN_PASSWD | sudo /opt/homebrew/bin/openconnect --script=/opt/homebrew/etc/vpnc/no-internal-dns --protocol=$PROTOCOL --background --quiet $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH 2>&1 > $LOG_FILE_PATH
         else
             printf "$PRIMARY"
             printf "Running the '$VPN_NAME' with detailed output ...\n"
             printf "$RESET"
-            echo $VPN_PASSWD | sudo /opt/homebrew/bin/openconnect --protocol=$PROTOCOL --background $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH 2>&1 > $LOG_FILE_PATH
+            echo $VPN_PASSWD | sudo /opt/homebrew/bin/openconnect --script=/opt/homebrew/etc/vpnc/no-internal-dns --protocol=$PROTOCOL --background $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH 2>&1 > $LOG_FILE_PATH
         fi
     else
         printf "$PRIMARY"
@@ -172,12 +172,12 @@ function connect(){
             printf "$PRIMARY"
             printf "Running the '$VPN_NAME' with less output (quiet) ...\n"
             printf "$RESET"
-            echo $VPN_PASSWD | sudo /opt/homebrew/bin/openconnect --protocol=$PROTOCOL --quiet $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH 2>&1
+            echo $VPN_PASSWD | sudo /opt/homebrew/bin/openconnect --script=/opt/homebrew/etc/vpnc/no-internal-dns --protocol=$PROTOCOL --quiet $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH 2>&1
         else
             printf "$PRIMARY"
             printf "Running the '$VPN_NAME' with detailed output ...\n"
             printf "$RESET"
-            echo $VPN_PASSWD | sudo /opt/homebrew/bin/openconnect --protocol=$PROTOCOL $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH 2>&1
+            echo $VPN_PASSWD | sudo /opt/homebrew/bin/openconnect --script=/opt/homebrew/etc/vpnc/no-internal-dns --protocol=$PROTOCOL $VPN_HOST --user=$VPN_USER --authgroup=$VPN_GROUP --passwd-on-stdin --pid-file $PID_FILE_PATH 2>&1
         fi
     fi
 

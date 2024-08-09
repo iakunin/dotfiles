@@ -119,6 +119,8 @@ ln -s $(pwd)/bin ~/
 chmod u+x $(pwd)/bin/*
 ln -s $(pwd)/macos/Library/LaunchAgents/com.github.iakunin.dotfiles.vpn.plist ~/Library/LaunchAgents
 sudo cp $(pwd)/etc/sudoers.d/openconnect /etc/sudoers.d/openconnect
+cp $(pwd)/opt/homebrew/etc/vpnc/no-internal-dns /opt/homebrew/etc/vpnc/no-internal-dns
+chmod +x /opt/homebrew/etc/vpnc/no-internal-dns
 ```
 
 ## Setting up ZSH customization
