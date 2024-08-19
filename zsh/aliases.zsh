@@ -8,6 +8,7 @@ alias la="ls -A"
 alias l="ls -CF"
 
 alias vpn="~/bin/vpn-up.sh start"
+alias vpn-sstp="~/bin/sstp-up.sh"
 alias ssh-ha="ssh root@homeassistant.local"
 alias ssh-host-ha="ssh root@homeassistant.local -p 22222"
 

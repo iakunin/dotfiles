@@ -119,6 +119,7 @@ ln -s $(pwd)/bin ~/
 chmod u+x $(pwd)/bin/*
 ln -s $(pwd)/macos/Library/LaunchAgents/com.github.iakunin.dotfiles.vpn.plist ~/Library/LaunchAgents
 sudo cp $(pwd)/etc/sudoers.d/openconnect /etc/sudoers.d/openconnect
+sudo cp $(pwd)/etc/sudoers.d/sstpc /etc/sudoers.d/sstpc
 ln -s $(pwd)/opt/homebrew/etc/vpnc/no-internal-dns /opt/homebrew/etc/vpnc/no-internal-dns
 chmod +x /opt/homebrew/etc/vpnc/no-internal-dns
 ```
