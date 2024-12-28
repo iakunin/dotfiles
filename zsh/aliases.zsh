@@ -11,6 +11,7 @@ alias vpn="~/bin/vpn-up.sh start"
 alias vpn-sstp="~/bin/sstp-up.sh"
 alias ssh-ha="ssh root@homeassistant.local"
 alias ssh-host-ha="ssh root@homeassistant.local -p 22222"
+alias ssh-avtomatik="ssh root@185.159.129.85"
 
 # vpn status
 alias vstatus="launchctl list | grep com.github.iakunin.dotfiles.vpn-up"
